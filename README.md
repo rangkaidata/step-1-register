@@ -77,8 +77,10 @@ Refresh browser dengan tmbol F5. Akan tampil form seperti gambar diatas.
 
 Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></script>.
 
+### step 1.1. Deklarasi Variable.
+
 ```javascript
-	<script>
+<script>
 	// step-1: register
 	// step-1: 1. deklarasi tiap element html untuk diambil isi dari object tersebut.
 	var msg=document.getElementById("msg");
@@ -89,10 +91,18 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 	var passcode_image=document.getElementById("passcode_image");
 	var user_passcode=document.getElementById("user_passcode");
 	var button_register=document.getElementById("button_register");
-	
+
+</script>
+```
+
+### step 1.2. Fokus di Input Text User Name.
+```javascript
 	// step-1: 2. fokus ditext user_name 
 	user_name.focus();
-	
+```
+
+### step 1.3. Fungsi Ketika Tombol Register di Klik.
+```javascript
 	// step-1: 3. fungsi untuk tombol register, ketika di klik.
 	button_register.onclick=function(){
 		
@@ -154,7 +164,7 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 	}
 	
 	// step-1: 5. selesai
-	</script>
+</script>
 ```
 Setelah script javascript dimasukkan, maka form pertama untuk Register User telah selesai. Dengan Form tersebut user bisa membuat User Baru dan mendaftarkan user tersebut di server datablok.id, dimana server tersebut akan membuat ruang baru untuk user yang digunakan untuk memasukkan data data, mengedit data, dan menghapus data. User tersebut akan menjadi administrator, dan bisa koneksi (Join) ke folder user lain, dengan modul Join User yang akan dijelaskan di step-13. 
 
