@@ -104,7 +104,7 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 	user_name.focus();
 ```
 
-### step 1.3. Fungsi Ketika Tombol Register di Klik.
+### Step 1.3. Fungsi Ketika Tombol Register di Klik.
 ```javascript
 	button_register.onclick=function(){
 		// kode ketika diklik.
@@ -117,7 +117,7 @@ Bila nilai tombol adalah Reset, maka program akan memanggil ulang halaman untuk 
 		location.replace(location.href);
 	}
 ```
-### Step 1.3.2. Masukkan Nilai Input Kedalam Variabel obj.
+### Step 1.3.2. Masukkan Nilai Input ke Dalam Variabel obj.
 Masukkan semua variable yang telah diinput dilayar kedalam variable obj. 
 ```javascript
 	const obj = {
@@ -153,7 +153,7 @@ Selanjutnya memasukkan paket data yang telah diterima kedalam variable. Dimana d
 ```javascript
 	var paket = JSON.parse(request.responseText);
 ```
-### Step 1.3.4.1.2. Kirim Ke Fungsi.
+### Step 1.3.4.1.2. Kirim ke Fungsi.
 Paket data yang telah diterima, dan sudah dikonversi ke javascript selanjutnya dikirim ke fungsi terimaData, untuk diproses di klien.
 ```javascript
 	terimaData(paket);
@@ -173,7 +173,7 @@ Data dikirim ke server dengan link https://datablok.id/v0/register/create.php, d
 	request.send(dbParam);
 ```
 ### Step 1.4. Fungsi Untuk Membaca Paket Data.
-Paket Data dari server telah siap, dan diolah di sisi klien. Yaitu memeriksa apakah responnya baik atau tidak. bila nilai responnya 0, data tersebut telah berhasil membuat user baru. Namun bila bukan 0, maka terjadi kesalahan. Untuk menampilkan pesan kesalahan maka paket.msg ditampilkan ke layar.
+Paket Data dari server telah siap, dan diolah di sisi klien. Yaitu memeriksa apakah responnya baik atau tidak. bila nilai responnya 0, proses data tersebut telah berhasil membuat user baru diserver. Namun bila bukan 0, maka terjadi kesalahan. Untuk menampilkan pesan kesalahan atau keberhasilan maka paket.msg ditampilkan ke layar.
 ```javascript
 	function terimaData(paket){
 		if (paket.err==0){
