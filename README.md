@@ -87,8 +87,6 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 
 ```javascript
 <script>
-	// step-1: register
-	// step-1: 1. deklarasi tiap element html untuk diambil isi dari object tersebut.
 	var msg=document.getElementById("msg");
 	var user_name=document.getElementById("user_name");
 	var user_fullname=document.getElementById("user_fullname");
@@ -103,7 +101,6 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 
 ### step 1.2. Fokus di Input Text User Name.
 ```javascript
-	// step-1: 2. fokus ditext user_name 
 	user_name.focus();
 ```
 
@@ -114,7 +111,7 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 	}
 ```
 ### step 1.3.1. Membaca nilai tombol.
-Bila nilai tombol adalah Reset, maka program akan memanggil ulang halaman untuk refresh.
+Bila nilai tombol adalah Reset, maka program akan memanggil ulang halaman untuk refresh. Bila nilai tombol adalah Register, maka lanjutkan baris berikutnya.
 ```javascript
 	if (button_register.innerHTML === "Reset"){
 		location.replace(location.href);
@@ -133,19 +130,19 @@ Masukkan semua variable yang telah diinput dilayar kedalam variable obj.
 	};
 ```
 ### step 1.3.3. Deklarasi XHR.
-XHR adalah XML HTTP Request, yaitu fungsi yang telah disediakan oleh javascript untuk mengirim data dan permintaan ke server sekaligus memberikan umpan balik atau respon balik ke client user. XHR dideklarasikan dengan nama request, sedangkan data sudah berubah format konversi JSON yaitu obj.
+XHR adalah XML HTTP Request, yaitu fungsi yang telah disediakan oleh javascript untuk mengirim data dan permintaan ke server sekaligus memberikan umpan balik atau respon balik ke client user. Disini fungsi XHR diinstansikan dengan nama request, sedangkan data inputan di format konversi ke bentuk JSON lalu dimasukan ke variabel dbParam.
 ```javascript		
 	var request = new XMLHttpRequest();
 	var dbParam = JSON.stringify(obj);
 ```
 ### step 1.3.4. Onload adalah fungsi ketika XHR mengirim ke server
-Ketika XHR dikirim keserver, dengan segera klien bisa memeriksa di onload.
+Ketika XHR dikirim keserver, dengan segera klien bisa memeriksa status pengiriman di onload.
 ```javascript
 	request.onload = function() {
 	}
 ```
 ### step 1.3.4.1. Memeriksa data masuk.
-Bila data dari server telah siap, yaitu dengan readyState=4
+Bila data dari server telah siap, yaitu dengan nilai readyState=4
 ```javascript
 	if (request.readyState===4){
 		...
@@ -187,4 +184,7 @@ Paket Data dari server telah siap, dan diolah di sisi klien. Yaitu memeriksa apa
 ```
 
 Setelah script javascript dimasukkan, maka form pertama untuk Register User telah selesai. Dengan Form tersebut user bisa membuat User Baru dan mendaftarkan user tersebut di server datablok.id, dimana server tersebut akan membuat ruang baru untuk user yang digunakan untuk memasukkan data data, mengedit data, dan menghapus data. User tersebut akan menjadi administrator, dan bisa koneksi (Join) ke folder user lain, dengan modul Join User yang akan dijelaskan di step-13. 
+
+
+Selamat Mencoba.
 
