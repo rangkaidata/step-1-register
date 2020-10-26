@@ -7,16 +7,20 @@ source code untuk membuat akun baru atau register akun.
 Langkah pertama dalam membuat aplikasi apapun yang menggunakan banyak user adalah dengan membuat register user. Dengan tujuan agar setiap user memiliki ruang tersendiri dalam worksheet masing-masing dan tidak tercampur dengan data worksheet user lain. Register User menggunakan User Name, Full Name, dan Password untuk ID di server dan membuat folder baru untuk User Baru. 
 
 Langkah pertama untuk membuat form Register User adalah membuat script htmlnya.
-1. Buatlah file di text editor seperti Notepad di windows atau Nano di Linux.
+1. Buatlah file baru dengan text editor seperti Notepad di windows atau Nano di Linux.
 2. Kopi script berikut, kemudian simpan dengan nama register.html.
 3. Kemudian bukalah file tersebut denga Browser seperti Chrome, Firefox atau Internet Explorer.
 
 ```
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Software Akuntansi Online">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Accounting, Akuntansi, Tutorial, Online, Software, Aplikasi, Web">
+    <meta name="author" content="Budiono">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akuntansi Online - Rangkaidata.com</title>
 </head>
 <body>
 <form> ... disini form inputan ... </form>
@@ -29,13 +33,16 @@ Setelah membuat script HTMLnya, langkah selanjutnya adalah membentuk form sesuai
 
 ```
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Software Akuntansi Online">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Accounting, Akuntansi, Tutorial, Online, Software, Aplikasi, Web">
+    <meta name="author" content="Budiono">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akuntansi Online - Rangkaidata.com</title>
 </head>
 <body>
-
 <form>
 	<h1>Register Akun Baru</h1>
 	<ul>
@@ -69,11 +76,10 @@ Setelah membuat script HTMLnya, langkah selanjutnya adalah membentuk form sesuai
 	</li>
 	</ul>
 </form>
-
 </body>
 </html> 
 ```
-Refresh browser dengan tmbol F5. Akan tampil form seperti gambar diatas.
+Refresh browser dengan tombol F5. Akan tampil form seperti gambar diatas.
 
 Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></script>.
 
@@ -103,70 +109,82 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 
 ### step 1.3. Fungsi Ketika Tombol Register di Klik.
 ```javascript
-	// step-1: 3. fungsi untuk tombol register, ketika di klik.
 	button_register.onclick=function(){
-		
-		// step-1: 3.1. bila tombol adalah reset, maka panggil ulang halaman
-		if (button_register.innerHTML === "Reset"){
-			location.replace(location.href);
-		}
-		
-		// step-1: 3.2. variable untuk data input
-		const obj = {
-			"home_folder":null,
-			"user_name":user_name.value,
-			"user_fullname":user_fullname.value,
-			"user_password":user_password.value,
-			"confirm_password":confirm_password.value,
-			"user_passcode":user_passcode.value
-		};
-		
-		// step-1: 3.3. deklarasi XHR untuk mengambil data dari server. 
-		//    deklarasi dbParam untuk menyimpan nilai input dan konversi ke format JSON
-		var request = new XMLHttpRequest();
-		var dbParam = JSON.stringify(obj);
-
-		// step-1: 3.4. fungsi ketika XHR di dimulai, atau terima respon server.
-		request.onload = function() {
-			
-			// step-1: 3.4.1. bila data dari server telah siap, yaitu dengan readyState=4
-			if (request.readyState===4){
-				
-				// step-1: 3.4.1.1. deklarasi variable paket, untuk tempat dari yang diterima dari server
-				var paket = JSON.parse(request.responseText);
-				
-				// step-1: 3.4.1.2. kirim paket data ke fungsi terimaData, untuk diproses selanjutnya
-				terimaData(paket);
-			} 
-			
-			// step-1: 3.4.2. bila terjadi error saat kirim data ke server
-			else {
-				console.log('Network request failed with response ' + request.status + ': ' + request.statusText)
-			}
-		};
-		
-		// step-1: 3.5. kirim data register user administrator ke server.
-		request.open('POST', 'https://datablok.id/v0/register/create.php');
-		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		request.send(dbParam);
+		// kode ketika diklik.
 	}
-	
-	// step-1: 4. fungsi untuk merangkai data dari server.
+```
+### step 1.3.1. Membaca nilai tombol.
+Bila nilai tombol adalah Reset, maka program akan memanggil ulang halaman untuk refresh.
+```javascript
+	if (button_register.innerHTML === "Reset"){
+		location.replace(location.href);
+	}
+```
+### step 1.3.2. Masukkan nilai input kedalam variabel obj.
+Masukkan semua variable yang telah diinput dilayar kedalam variable obj. 
+```javascript
+	const obj = {
+		"home_folder":null,
+		"user_name":user_name.value,
+		"user_fullname":user_fullname.value,
+		"user_password":user_password.value,
+		"confirm_password":confirm_password.value,
+		"user_passcode":user_passcode.value
+	};
+```
+### step 1.3.3. Deklarasi XHR.
+XHR adalah XML HTTP Request, yaitu fungsi yang telah disediakan oleh javascript untuk mengirim data dan permintaan ke server sekaligus memberikan umpan balik atau respon balik ke client user. XHR dideklarasikan dengan nama request, sedangkan data sudah berubah format konversi JSON yaitu obj.
+```javascript		
+	var request = new XMLHttpRequest();
+	var dbParam = JSON.stringify(obj);
+```
+### step 1.3.4. Onload adalah fungsi ketika XHR mengirim ke server
+Ketika XHR dikirim keserver, dengan segera klien bisa memeriksa di onload.
+```javascript
+	request.onload = function() {
+	}
+```
+### step 1.3.4.1. Memeriksa data masuk.
+Bila data dari server telah siap, yaitu dengan readyState=4
+```javascript
+	if (request.readyState===4){
+		...
+	} 
+```
+### step 1.3.4.1.1. deklarasi variable paket.
+Selanjutnya memasukkan paket data yang telah diterima kedalam variable. Dimana data tersebut dikonversi ke array javascript.
+```javascript
+	var paket = JSON.parse(request.responseText);
+```
+### step 1.3.4.1.2. Kirim ke Fungsi.
+Paket data yang telah diterima, dan sudah dikonversi ke javascript selanjutnya dikirim ke fungsi terimaData, untuk diproses di klien.
+```javascript
+	terimaData(paket);
+```
+### step 1.3.4.2. Bila terjadi Error.
+Bila terjadi error saat kirim data ke server, tampilkan dikonsol browser untuk diperiksa.
+```javascript
+	else {
+		console.log('Network request failed with response ' + request.status + ': ' + request.statusText)
+	}
+```
+### step 1.3.5. Mengirim data ke server.
+Data dikirim ke server dengan link https://datablok.id/v0/register/create.php, dan juga parameternya seperti dbParam.
+```javascript
+	request.open('POST', 'https://datablok.id/v0/register/create.php');
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.send(dbParam);
+```
+### step 1.4. Fungsi Untuk membaca paket data.
+Paket Data dari server telah siap, dan diolah di sisi klien. Yaitu memeriksa apakah responnya baik atau tidak. bila nilai responnya 0, data tersebut telah berhasil membuat user baru. Namun bila bukan 0, maka terjadi kesalahan. Untuk menampilkan pesan kesalahan maka paket.msg ditampilkan ke layar.
+```javascript
 	function terimaData(paket){
-		
-		// step-1: 4.1. bila error tidak ada atau 0, ganti tombol menjadi reset.
 		if (paket.err==0){
 			button_register.innerHTML = "Reset";
 		}
-		
-		// step-1: 4.2. tampilkan pesan yang diterima dari server ke user.
 		msg.innerHTML = "Message: "+paket.msg;
 	}
-	
-	// step-1: 5. selesai
-</script>
 ```
-Setelah script javascript dimasukkan, maka form pertama untuk Register User telah selesai. Dengan Form tersebut user bisa membuat User Baru dan mendaftarkan user tersebut di server datablok.id, dimana server tersebut akan membuat ruang baru untuk user yang digunakan untuk memasukkan data data, mengedit data, dan menghapus data. User tersebut akan menjadi administrator, dan bisa koneksi (Join) ke folder user lain, dengan modul Join User yang akan dijelaskan di step-13. 
 
-Penjelasan Javascriptnya adalah sebagai berikut:
+Setelah script javascript dimasukkan, maka form pertama untuk Register User telah selesai. Dengan Form tersebut user bisa membuat User Baru dan mendaftarkan user tersebut di server datablok.id, dimana server tersebut akan membuat ruang baru untuk user yang digunakan untuk memasukkan data data, mengedit data, dan menghapus data. User tersebut akan menjadi administrator, dan bisa koneksi (Join) ke folder user lain, dengan modul Join User yang akan dijelaskan di step-13. 
 
