@@ -1,4 +1,4 @@
-# step-1-register
+# Step-1-register
 source code untuk membuat akun baru atau register akun.
 
 ![Register-User](https://github.com/rangkaidata/step-1-register/blob/master/register.png)
@@ -83,7 +83,7 @@ Refresh browser dengan tombol F5. Akan tampil form seperti gambar diatas.
 
 Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></script>.
 
-### step 1.1. Deklarasi Variable.
+### Step 1.1. Deklarasi Variable.
 
 ```javascript
 <script>
@@ -99,7 +99,7 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 </script>
 ```
 
-### step 1.2. Fokus di Input Text User Name.
+### Step 1.2. Fokus di Input Text User Name.
 ```javascript
 	user_name.focus();
 ```
@@ -110,14 +110,14 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 		// kode ketika diklik.
 	}
 ```
-### step 1.3.1. Membaca nilai tombol.
+### Step 1.3.1. Membaca Nilai Tombol.
 Bila nilai tombol adalah Reset, maka program akan memanggil ulang halaman untuk refresh. Bila nilai tombol adalah Register, maka lanjutkan baris berikutnya.
 ```javascript
 	if (button_register.innerHTML === "Reset"){
 		location.replace(location.href);
 	}
 ```
-### step 1.3.2. Masukkan nilai input kedalam variabel obj.
+### Step 1.3.2. Masukkan Nilai Input Kedalam Variabel obj.
 Masukkan semua variable yang telah diinput dilayar kedalam variable obj. 
 ```javascript
 	const obj = {
@@ -129,50 +129,50 @@ Masukkan semua variable yang telah diinput dilayar kedalam variable obj.
 		"user_passcode":user_passcode.value
 	};
 ```
-### step 1.3.3. Deklarasi XHR.
+### Step 1.3.3. Deklarasi XHR.
 XHR adalah XML HTTP Request, yaitu fungsi yang telah disediakan oleh javascript untuk mengirim data dan permintaan ke server sekaligus memberikan umpan balik atau respon balik ke client user. Disini fungsi XHR diinstansikan dengan nama request, sedangkan data inputan di format konversi ke bentuk JSON lalu dimasukan ke variabel dbParam.
 ```javascript		
 	var request = new XMLHttpRequest();
 	var dbParam = JSON.stringify(obj);
 ```
-### step 1.3.4. Onload adalah fungsi ketika XHR mengirim ke server
+### Step 1.3.4. Onload Adalah Fungsi Ketika XHR Mengirim ke Server
 Ketika XHR dikirim keserver, dengan segera klien bisa memeriksa status pengiriman di onload.
 ```javascript
 	request.onload = function() {
 	}
 ```
-### step 1.3.4.1. Memeriksa data masuk.
+### Step 1.3.4.1. Memeriksa Data Masuk.
 Bila data dari server telah siap, yaitu dengan nilai readyState=4
 ```javascript
 	if (request.readyState===4){
 		...
 	} 
 ```
-### step 1.3.4.1.1. deklarasi variable paket.
+### Step 1.3.4.1.1. Deklarasi Variabel Untuk Data.
 Selanjutnya memasukkan paket data yang telah diterima kedalam variable. Dimana data tersebut dikonversi ke array javascript.
 ```javascript
 	var paket = JSON.parse(request.responseText);
 ```
-### step 1.3.4.1.2. Kirim ke Fungsi.
+### Step 1.3.4.1.2. Kirim Ke Fungsi.
 Paket data yang telah diterima, dan sudah dikonversi ke javascript selanjutnya dikirim ke fungsi terimaData, untuk diproses di klien.
 ```javascript
 	terimaData(paket);
 ```
-### step 1.3.4.2. Bila terjadi Error.
+### Step 1.3.4.2. Bila Terjadi Error.
 Bila terjadi error saat kirim data ke server, tampilkan dikonsol browser untuk diperiksa.
 ```javascript
 	else {
 		console.log('Network request failed with response ' + request.status + ': ' + request.statusText)
 	}
 ```
-### step 1.3.5. Mengirim data ke server.
+### Step 1.3.5. Mengirim Data Ke Server.
 Data dikirim ke server dengan link https://datablok.id/v0/register/create.php, dan juga parameternya seperti dbParam.
 ```javascript
 	request.open('POST', 'https://datablok.id/v0/register/create.php');
 	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	request.send(dbParam);
 ```
-### step 1.4. Fungsi Untuk membaca paket data.
+### Step 1.4. Fungsi Untuk Membaca Paket Data.
 Paket Data dari server telah siap, dan diolah di sisi klien. Yaitu memeriksa apakah responnya baik atau tidak. bila nilai responnya 0, data tersebut telah berhasil membuat user baru. Namun bila bukan 0, maka terjadi kesalahan. Untuk menampilkan pesan kesalahan maka paket.msg ditampilkan ke layar.
 ```javascript
 	function terimaData(paket){
