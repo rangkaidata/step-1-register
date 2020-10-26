@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="description" content="Software Akuntansi Online">
+    		<meta name="keywords" content="HTML, CSS, JavaScript, Accounting, Akuntansi, Tutorial, Online, Software, Aplikasi, Web">
+    		<meta name="author" content="Budiono">
+    		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Register</title>
 		<style>
 			body {
@@ -65,8 +69,8 @@
 	</ul>
 </form>
 	<script>
-	// step-1: register
-	// step-1: 1. deklarasi tiap element html untuk diambil isi dari object tersebut.
+	// step-1. register
+	// step-1.1.
 	var msg=document.getElementById("msg");
 	var user_name=document.getElementById("user_name");
 	var user_fullname=document.getElementById("user_fullname");
@@ -75,19 +79,15 @@
 	var passcode_image=document.getElementById("passcode_image");
 	var user_passcode=document.getElementById("user_passcode");
 	var button_register=document.getElementById("button_register");
-	
-	// step-1: 2. fokus ditext user_name 
+	// step-1.2.
 	user_name.focus();
-	
-	// step-1: 3. fungsi untuk tombol register, ketika di klik.
+	// step-1.3.
 	button_register.onclick=function(){
-		
-		// step-1: 3.1. bila tombol adalah reset, maka panggil ulang halaman
+		// step-1.3.1.
 		if (button_register.innerHTML === "Reset"){
 			location.replace(location.href);
 		}
-		
-		// step-1: 3.2. variable untuk data input
+		// step-1.3.2.
 		const obj = {
 			"home_folder":null,
 			"user_name":user_name.value,
@@ -96,50 +96,38 @@
 			"confirm_password":confirm_password.value,
 			"user_passcode":user_passcode.value
 		};
-		
-		// step-1: 3.3. deklarasi XHR untuk mengambil data dari server. 
-		//    deklarasi dbParam untuk menyimpan nilai input dan konversi ke format JSON
+		// step-1.3.3.
 		var request = new XMLHttpRequest();
 		var dbParam = JSON.stringify(obj);
-
-		// step-1: 3.4. fungsi ketika XHR di dimulai, atau terima respon server.
+		// step-1.3.4.
 		request.onload = function() {
-			
-			// step-1: 3.4.1. bila data dari server telah siap, yaitu dengan readyState=4
+			// step-1.3.4.1.
 			if (request.readyState===4){
-				
-				// step-1: 3.4.1.1. deklarasi variable paket, untuk tempat dari yang diterima dari server
-				var paket = JSON.parse(request.responseText);
-				
-				// step-1: 3.4.1.2. kirim paket data ke fungsi terimaData, untuk diproses selanjutnya
+				// step-1.3.4.1.1.
+				var paket = JSON.parse(request.responseText);		
+				// step-1.3.4.1.2.
 				terimaData(paket);
 			} 
-			
-			// step-1: 3.4.2. bila terjadi error saat kirim data ke server
+			// step-1.3.4.2.
 			else {
 				console.log('Network request failed with response ' + request.status + ': ' + request.statusText)
 			}
 		};
-		
-		// step-1: 3.5. kirim data register user administrator ke server.
+		// step-1.3.5.
 		request.open('POST', 'https://datablok.id/v0/register/create.php');
 		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		request.send(dbParam);
 	}
-	
-	// step-1: 4. fungsi untuk merangkai data dari server.
-	function terimaData(paket){
-		
-		// step-1: 4.1. bila error tidak ada atau 0, ganti tombol menjadi reset.
+	// step-1.4.
+	function terimaData(paket){	
+		// step-1.4.1.
 		if (paket.err==0){
 			button_register.innerHTML = "Reset";
 		}
-		
-		// step-1: 4.2. tampilkan pesan yang diterima dari server ke user.
+		// step-1.4.2.
 		msg.innerHTML = "Message: "+paket.msg;
 	}
-	
-	// step-1: 5. selesai
+	// step-1.5.
 	</script>
 </body>
 </html> 
