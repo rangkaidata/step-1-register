@@ -84,7 +84,7 @@ Refresh browser dengan tombol F5. Akan tampil form seperti gambar diatas.
 Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></script>.
 
 ### Step 1.1. Deklarasi Variable.
-
+Sebelum script program berjalan, maka perlu didefinikan variabel untuk memasukkan nilai-nilai input dari user. Nilai input tersebut terdapat didalam element HTML yang sudah didefinisikan diform. Nilai input itu seperti user_name,user_fullname,user_password, confirm_password,user_passcode, dan button_register. Sedangkan nilai output seperti msg, passcode_image.
 ```javascript
 <script>
 	var msg=document.getElementById("msg");
@@ -100,11 +100,13 @@ Langkah selanjutnya adalah memasukkan kode javascript di dalam sintax <script></
 ```
 
 ### Step 1.2. Fokus di Input Text User Name.
+Ketika halaman web refresh, maka user_name menjadi fokus menjadi inputan pertama user.
 ```javascript
 	user_name.focus();
 ```
 
 ### Step 1.3. Fungsi Ketika Tombol Register di Klik.
+Setelah form diinput lengkap, user akan menekan tombol register untuk mengirim ke server.
 ```javascript
 	button_register.onclick=function(){
 		// kode ketika diklik.
